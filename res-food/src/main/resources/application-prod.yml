@@ -1,0 +1,114 @@
+spring:
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher # swagger 的路径匹配方法
+  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+    password: 1017 # 线上mysql8的密码
+    url: jdbc:mysql://172.22.0，2:3306/yc125res?serverTimezone=UTC # 线上mysql8的地址
+    # 使用druid数据库
+    druid:
+      # 初始化时建立物理联接的个数
+      initial-size: 5
+      # 联接池的最小空闲量
+      min-idle: 5
+      # 联接池最大连接数量
+      max-active: 20
+      # 获取联接时最大等待时间，单位毫秒
+      max-wait: 60000
+      # 申请联接的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMills，执行 validationQuery 检测联接是否有效
+      test-while-idle: true
+      # 既作为检测间隔时间，也作为 testWhileIdel 执行的依据
+      time-between-eviction-runs-millis: 60000
+      # 销毁线程时，检测当前联接的最后活动时间的当前时间差大于该值时，关闭当前联接（配置联接在池中的最小生存时间）
+      min-evictable-idle-time-millis: 30000
+      # 用来检测数据库联接是否有效的sql，这里指得是必须时一个查询语句(oracle 中为 select 1 from dual)
+      validation-query: select 'x'
+      # 申请联接时会执行 validationQuery 检测联接是否有效，开启会降低性能，默认为 true
+      test-on-borrow: false
+      # 归还联接时会执行 validationQuery 检测联接是否有效，开启会降低性能，默认为 true
+      test-on-return: false
+      # 是否缓存 preparedStatement，也就是 PSCache，PSCache 对支持游标的数据库性能提升巨大，比如说 oracle，在mysql下建议关闭
+      pool-prepared-statements: false
+      # 设置监控统计拦截的 filters，去掉后，监控界面的sql无法统计， stat：监控统计；slf4j：日志记录；wall：防御sql注入
+      filters: stat, wall, slf4j
+      # 要启动 PSCache，必须配置大于0，当大于0时，poolPreparedStatements 自动触发修改为true，在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配大一些
+      max-pool-prepared-statement-per-connection-size: -1
+      # 合并多个 DruidDataSource 的监控数据
+      use-global-data-source-stat: true
+      # 通过 connectProperties 属性来打开 mergeSql 功能：慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+      web-stat-filter:
+        # 是否启动StatFilter 默认值 true
+        enabled: true
+        # 添加过滤规则
+        url-pattern: /*
+        # 忽略过滤的格式
+        exclusions: /druid/*, *.js, *.gif, *.png, *.css, *.ico
+      stat-view-servlet:
+        # 是否启动 StatViewServlet  默认值 true
+        enabled: true
+        # 访问路径为 /druid时，跳转到 StatViewServlet
+        url-pattern: /druid/*
+        # 是否能够重值数据
+        reset-enable: false
+        # 需要账号密码才能访问控制台，默认为root
+        login-username: druid
+        login-password: druid     # 上线后请将密码设置复杂，且允许远程访问
+        # IP白名单
+        allow: 127.0.0.1
+        # IP黑名单 （共同存在时，deng优先于allow)
+        deny:
+
+#  devtools:
+#    restart:
+#      enabled: true
+#      # 自动监控java源码的变化，如发生变化，是自动编译项目
+#      additional-paths: src/main/java
+#      exclude: static/**
+
+  cloud:
+    nacos:
+      # cloud 的服务注册发现功能
+      discovery:
+        # TODO： 将此服务注册到本机的 nacos容器 中
+        server-addr: localhost:8848
+        # nacos登录用户名和密码
+        username: nacos
+        password: nacos
+
+  application:
+    # 此服务的服务名，在nacos服务器中显示，以示区分
+    name: res-food
+
+
+server:
+  # 此服务的端口（注意区分各个微服务的端口）
+  port: 9001
+
+
+# 通过actuator暴露此服务的管理端口
+#management:
+#  endpoints:
+#    # 通过web来暴露管理API的端口，可以看到运行情况之类的
+#    web:
+#      exposure:
+#        # * 代表将所有的端口暴露（测试阶段用，正式不可以），一定要加“”，因为 * 是特殊字符，加“”防止转义
+#        include: "*"   # 上线后就不开放监控端口了
+
+
+logging:
+  level:
+    root: info
+    com.yc: info
+    org.springframework: info
+  file:
+    path: ./logs
+
+
+mybatis-plus:
+  configuration:
+    # 打印 mybatis-plus 的 sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
