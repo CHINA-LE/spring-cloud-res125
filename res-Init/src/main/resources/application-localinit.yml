@@ -1,0 +1,16 @@
+spring:
+#  datasource:
+#    # 注意这个文件夹用于初始化数据库的，所以联接的是 3308，即容器中的数据库
+#    url: jdbc:mysql://localhost:3308/yc125res?serverTimezone=UTC
+#    username: root
+#    password: a
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      schema-locations:
+        -classpath*: schema-all.sql   # DDL脚本：创建表与约束
+      data-locations:
+        -classpath*: data-all.sql     # 表中的初始数据
+      username: root
+      password: 1017
+      mode: always  # *** 注意它的取值，表示使用基于脚本的初始化

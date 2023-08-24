@@ -1,0 +1,14 @@
+server:
+  port: 8082
+logging:
+  level:
+    org.springframework: info
+
+# 在这个 init中，只需要用到 spring 创建 datasource，用这个datasource 来 init
+spring:
+  datasource:
+    # 注意这个文件用于初始化数据库的，所以联接的是3308，即容器中的数据库
+    url: jdbc:mysql://localhost:3306/yc125res?serverTimezone=UTC
+    username: root
+    password: 1017
+    driver-class-name: com.mysql.cj.jdbc.Driver
