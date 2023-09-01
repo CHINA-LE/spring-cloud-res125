@@ -13,6 +13,9 @@
         <module>res-web</module>
         <module>res-food</module>
         <module>res-init</module>
+        <module>res-security</module>
+        <module>testsentinelHello</module>
+        <module>res-order</module>
     </modules>
 
     <parent>
@@ -69,7 +72,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.28</version>
+                <version>1.18.26</version>
                 <!-- 关于版本号，使用版本仲裁机制来确定  -->
             </dependency>
 
@@ -125,7 +128,7 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.4.2</version>
             </dependency>
-
+            <!-- swagger3.0 国外原生 -->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
@@ -178,9 +181,28 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
-                <version>2021.0.5.0</version>
+                <version>2021.0.6</version>
             </dependency>
 
+            <!-- 引入 security -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot-version}</version>
+            </dependency>
+            <!-- 引入 jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+
+            <!-- sentinel 客户端依赖 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                <version>2021.0.5.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -8,6 +8,8 @@ spring:
     password: 1017
     url: jdbc:mysql://localhost:3306/yc125res?serverTimezone=UTC # 此处联接的是本地数据库
     # 使用druid数据库
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Druid 的其他属性配置
     druid:
       # 初始化时建立物理联接的个数
       initial-size: 5
@@ -46,7 +48,7 @@ spring:
         # 添加过滤规则
         url-pattern: /*
         # 忽略过滤的格式
-        exclusions: /druid/*, *.js, *.gif, *.png, *.css, *.ico
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
       stat-view-servlet:
         # 是否启动 StatViewServlet  默认值 true
         enabled: true
@@ -70,6 +72,11 @@ spring:
       exclude: static/**
 
   cloud:
+    sentinel:
+      transport:
+        port: 8719                  # 跟控制台交流的端口，随意指定一个未被使用的端口即可
+        dashboard: localhost:9999   # dashboard地址与端口
+      eager: true                   # 表示 Sentinel 会在应用启动时立即进行初始化，这意味着 Sentinel 会立即加载
     nacos:
       # cloud 的服务注册发现功能
       discovery:
@@ -86,7 +93,7 @@ spring:
 
 server:
   # 此服务的端口（注意区分各个微服务的端口）
-  port: 9001
+  port: 9011
 
 
 # 通过actuator暴露此服务的管理端口
