@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class Resorderitem implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer roiid;
+
     private Integer roid;
     private Integer fid;
     private Double dealprice;

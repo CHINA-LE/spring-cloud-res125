@@ -15,13 +15,14 @@ import java.util.Date;
 public class Resorder implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer roid;
-    private Integer userid;
-    private String address;
-    private String tel;
 
-    private String ordertime;
-    private String deliverytime; // 时间当成String处理
+    private Integer userid; // 收货人
+    private String address; // 地址
+    private String tel; // 电话
 
-    private String ps;
+    private String ordertime; // 下订时间
+    private String deliverytime; // 发货时间 // 时间当成String处理
+
+    private String ps; // 留言
     private Integer status;
 }

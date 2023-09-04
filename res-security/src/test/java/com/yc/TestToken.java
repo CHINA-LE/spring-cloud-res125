@@ -32,7 +32,7 @@ public class TestToken extends TestCase {
             }
             @Override
             public String getPassword() {
-                return "$2a$10$4AlRcNGs3dTRR1rPi0a19.5YE0yb0JglFY4pUoyByauxdqENZlxEG";
+                return "a";
             }
             @Override
             public String getUsername() {

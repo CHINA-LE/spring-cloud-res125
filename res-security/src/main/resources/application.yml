@@ -85,6 +85,8 @@ spring:
         # nacos登录用户名和密码
         username: nacos
         password: nacos
+        # 设定服务列表（各服务列表互不相通） 或者说命名空间不同
+        namespace: yc125test
 
   application:
     # 此服务的服务名，在nacos服务器中显示，以示区分
@@ -119,3 +121,4 @@ mybatis-plus:
   configuration:
     # 打印 mybatis-plus 的 sql语句
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
